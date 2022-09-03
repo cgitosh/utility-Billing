@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+import environ
+
+#initialize environmental variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +28,7 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4z5xrxkwb6^1sx=c_j0)sn0jv2^q=+g636-=y@r1wg0-0eb4i@'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -109,10 +114,10 @@ WSGI_APPLICATION = 'utility_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',                  
-        'NAME': 'utilityDB',
-        'USER': 'postgres',
-        'PASSWORD': 'NIDno23430308',        
-        'PORT':'5432',
+        'NAME': env('Database_NAME'),
+        'USER': env('Database_USER'),
+        'PASSWORD': env('Database_PASSWORD'),
+        'PORT':env('PORT')
   }
 }
 
